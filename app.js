@@ -1,22 +1,24 @@
 window.onload = function(){
 var searchBtn = document.getElementById("searchButton")
+var searchin = document.getElementById("searchin")
+var result = document.getElementById("result")
 
 searchBtn.addEventListener('click', function(){
-
+var query = searchin.value.trim();
 const httpRequest = new XMLHttpRequest();
 var url = "superheroes.php";
 
+if (query){
+    url += '?query=' + query;
+}
+
 httpRequest.onreadystatechange = function(){
     
-
-
     if (httpRequest.readyState === XMLHttpRequest.DONE) {
         if (httpRequest.status === 200) {
-          //var response = httpRequest.responseText;
-          //alert(response)
-          alert(httpRequest.responseText)
+          result.innerHTML = httpRequest.responseText
         } else {
-          alert('There was a problem with the request.');
+          result.innerHTML = 'There was a problem with the request.';
         }
       }
     }
